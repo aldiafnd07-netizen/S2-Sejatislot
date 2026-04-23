@@ -184,7 +184,10 @@ fitur_html = """
 </div>
 
 <div class="scroll-container">
-    <div class="brand-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Pragmatic_Play_logo.png/640px-Pragmatic_Play_logo.png"><br>HOT</div>
+    <div class="brand-item">
+    <img src="https://akongads.store/images/menu-icon/slot.webp">
+    <br>SLOT
+</div>
     <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0R_B8n1lG4_u7yS6Wv3U4J_Y_6rB8v8_oOA&s"><br>PG SOFT</div>
     <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x_q8hZ68o2fIuN7VlZ1t2H6Y-f5K6-r-wA&s"><br>HB</div>
     <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7z_p8H-vM-0_Zz_kZ5-9-r_S6r_6-v_9_w&s"><br>JOKER</div>
