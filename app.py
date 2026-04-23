@@ -136,7 +136,7 @@ fitur_html = """
         animation: jalan-terus 15s linear infinite;
     }
 
-    /* Scroll Brand Anyar */
+    /* Scroll Brand Anyar (Gambar Caang) */
     .scroll-container {
         display: flex; overflow-x: auto; white-space: nowrap; gap: 15px; padding: 15px 5px; 
         background: rgba(0,0,0,0.5); border-radius: 10px; margin-top:10px;
@@ -184,15 +184,11 @@ fitur_html = """
 </div>
 
 <div class="scroll-container">
-    <div class="brand-item">
-    <img src="https://akongads.store/images/menu-icon/slot.webp">
-    <br>SLOT
-</div>
-    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0R_B8n1lG4_u7yS6Wv3U4J_Y_6rB8v8_oOA&s"><br>PG SOFT</div>
-    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x_q8hZ68o2fIuN7VlZ1t2H6Y-f5K6-r-wA&s"><br>HB</div>
-    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7z_p8H-vM-0_Zz_kZ5-9-r_S6r_6-v_9_w&s"><br>JOKER</div>
-    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR_eYp-o6T-0W-KqS-6Q6W_U&s"><br>CQ9</div>
-    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_X_Y_Z_I_O_P_Q_R&s"><br>SPADE</div>
+    <div class="brand-item"><img src="https://akongads.store/images/menu-icon/slot.webp"><br>SLOT</div>
+    <div class="brand-item"><img src="https://i.ibb.co/S769989/pragmatic.png"><br>PRAGMATIC</div>
+    <div class="brand-item"><img src="https://i.ibb.co/0YmYVf8/pgsoft.png"><br>PG SOFT</div>
+    <div class="brand-item"><img src="https://i.ibb.co/XW3px3P/habanero.png"><br>HB</div>
+    <div class="brand-item"><img src="https://i.ibb.co/fM8vXz3/joker.png"><br>JOKER</div>
 </div>
 
 <div class="winner-box">
@@ -224,7 +220,7 @@ fitur_html = """
 </div>
 
 <script>
-    let sIdx = 0; setInterval(() => { sIdx = (sIdx + 1) % 3; document.getElementById('mainSlider').scrollTo({left: sIdx * document.getElementById('mainSlider').clientWidth, behavior: 'smooth'}); }, 3000);
+    let sIdx = 0; setInterval(() => { sIdx = (sIdx + 1) % 3; const s = document.getElementById('mainSlider'); if(s) s.scrollTo({left: sIdx * s.clientWidth, behavior: 'smooth'}); }, 3000);
     const us = ["J***p", "R***ky", "S2***ot", "A***ng", "M***ky"];
     const gs = ["Olympus", "Mahjong 2", "Princess"];
     setInterval(() => {
@@ -238,6 +234,7 @@ fitur_html = """
 </script>
 """
 components.html(fitur_html, height=650)
+
 
 # --- 7. INPUT LOGIN TENGAH ---
 st.markdown("### 🔑 LOGIN UTAMA")
