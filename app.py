@@ -182,13 +182,38 @@ fitur_komplit_html = """
         <img src="https://i.imgur.com/kek6NF4.png">
     </div>
 </div>
-
+st.markdown("""
 <div class="rgb-border">
     <div class="inner-marquee">
-        <div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATI SLOT - SITUS GACOR TERPERCAYA - PROSES DEPO WD PASTI DIBAYAR LUNAS & TERCEPAT SE-INDONESIA! 🔥</div>
+        <div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATI SLOT - SITUS GACOR TERPERCAYA - DEPO WD CEPAT!</div>
     </div>
 </div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<style>
+    .scroll-container {
+        display: flex;
+        overflow-x: auto; white-space: nowrap; gap: 15px; padding: 10px; background: #000;
+    }
+    .scroll-container::-webkit-scrollbar { display: none; }
+    .brand-item {
+        flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px;
+    }
+    .brand-item img {
+        width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #222;
+    }
+</style>
 
+<div class="scroll-container">
+    <div class="brand-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Pragmatic_Play_logo.png/640px-Pragmatic_Play_logo.png"><br>Hot</div>
+    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0R_B8n1lG4_u7yS6Wv3U4J_Y_6rB8v8_oOA&s"><br>PG Soft</div>
+    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x_q8hZ68o2fIuN7VlZ1t2H6Y-f5K6-r-wA&s"><br>Habanero</div>
+    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7z_p8H-vM-0_Zz_kZ5-9-r_S6r_6-v_9_w&s"><br>Joker</div>
+    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7z_p8H-vM-0_Zz_kZ5-9-r_S6r_6-v_9_w&s"><br>CQ9</div>
+    <div class="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7z_p8H-vM-0_Zz_kZ5-9-r_S6r_6-v_9_w&s"><br>Spade</div>
+</div>
+""", unsafe_allow_html=True)
+st.markdown("""
 <div class="winner-box">
     <div style="color:#ffd700; font-size:11px; font-weight:bold; border-bottom:1px solid #333; margin-bottom:8px;">🏆 LIVE WINNER REAL-TIME</div>
     <div class="win-content">
