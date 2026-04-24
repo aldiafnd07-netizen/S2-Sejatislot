@@ -115,10 +115,22 @@ with c2:
     if st.button("MASUK", use_container_width=True): login_dialog()
     if st.button("DAFTAR", use_container_width=True): register_dialog()
 
-# --- 6. FITUR VISUAL (SLIDER, MARQUEE, SCROLL BRAND, DLL) ---
+# --- 6. LOGIKA MENU & VISUAL (VERSI GACOR) ---
+if 'menu_aktif' not in st.session_state:
+    st.session_state.menu_aktif = "SLOT"
+
+# CSS pikeun ngaleungitkeun padding standar streamlit sangkan rapih
+st.markdown("""<style>.block-container {padding-top: 1rem;}</style>""", unsafe_allow_html=True)
+# Cék menu mana anu nuju aktif tina URL
+query_params = st.query_params
+menu_aktif = query_params.get("menu", "SLOT") # Defaultna SLOT mun kakara buka
+
 fitur_html = """
 <style>
-    /* Slider Banner */
+    /* CSS Dasar & Reset */
+    body { margin: 0; font-family: sans-serif; background: #0c0e12; color: white; }
+    
+    /* Slider Banner Otomatis */
     .slider-container { width: 100%; overflow: hidden; border-radius: 15px; margin-bottom:10px; }
     .slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
     .slider::-webkit-scrollbar { display: none; }
@@ -126,45 +138,34 @@ fitur_html = """
 
     /* RGB Marquee */
     .rgb-border {
-        margin-top: 10px; padding: 3px; border-radius: 10px;
+        margin: 10px 0; padding: 2px; border-radius: 10px;
         background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
         background-size: 400% 400%; animation: rgb-move 5s linear infinite;
     }
-    .inner-marquee { background: #1a1d24; border-radius: 8px; padding: 10px; overflow: hidden; }
+    .inner-marquee { background: #1a1d24; border-radius: 8px; padding: 8px; overflow: hidden; }
     .scrolling-text {
-        display: inline-block; white-space: nowrap; color: #ffd700; font-weight: bold;
+        display: inline-block; white-space: nowrap; color: #ffd700; font-weight: bold; font-size: 12px;
         animation: jalan-terus 15s linear infinite;
     }
 
-    /* Scroll Brand Anyar (Gambar Caang) */
+    /* Scroll Brand Menu (Bisa di-klik) */
     .scroll-container {
-        display: flex; overflow-x: auto; white-space: nowrap; gap: 15px; padding: 15px 5px; 
-        background: rgba(0,0,0,0.5); border-radius: 10px; margin-top:10px;
+        display: flex; overflow-x: auto; white-space: nowrap; gap: 12px; padding: 15px 10px;
+        background: rgba(0,0,0,0.6); border-radius: 12px; margin-bottom: 15px;
     }
     .scroll-container::-webkit-scrollbar { display: none; }
-    .brand-item { flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px; font-weight: bold; }
-    .brand-item img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #222; }
+    .brand-item { flex: 0 0 auto; width: 65px; text-align: center; cursor: pointer; transition: 0.3s; }
+    .brand-item:active { transform: scale(0.9); }
+    .brand-item img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #222; margin-bottom: 5px; }
+    .brand-item span { color: #ffd700; font-size: 10px; font-weight: bold; display: block; }
 
     /* Winner Box & JP */
-    .winner-box { background: rgba(26, 29, 36, 0.95); border-radius: 12px; border: 1px solid #333; padding: 10px; margin-top:10px; }
-    .win-content { display: flex; justify-content: space-between; color: white; font-size: 10px; margin-top: 5px; }
-    .jp-wrapper { margin-top: 10px; background: #000; border: 2px solid #ffd700; border-radius: 10px; padding: 10px; text-align: center; }
-    .jp-num { color: #ff0000; font-size: 24px; font-weight: 900; }
+    .winner-box { background: rgba(26, 29, 36, 0.95); border-radius: 12px; border: 1px solid #333; padding: 10px; margin-bottom: 10px; }
+    .win-content { display: flex; justify-content: space-between; color: white; font-size: 11px; margin-top: 5px; }
+    .jp-wrapper { background: #000; border: 2px solid #ffd700; border-radius: 10px; padding: 8px; text-align: center; }
+    .jp-num { color: #ff0000; font-size: 22px; font-weight: 900; text-shadow: 0 0 5px rgba(255,0,0,0.5); }
 
-    /* LIVE CHAT POPUP */
-    #btn-chat-s2 {
-        position: fixed; bottom: 110px; right: 20px; width: 65px; height: 65px;
-        background: radial-gradient(circle, #00fbff, #0072ff); border-radius: 50%;
-        display: flex; justify-content: center; align-items: center; font-size: 35px;
-        z-index: 9999; cursor: pointer; border: 3px solid white;
-    }
-    #overlay-s2 { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9998; }
-    #popup-s2 {
-        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 85%; max-width: 380px; background: #1a1a1a; border: 2px solid #ffd700;
-        border-radius: 20px; z-index: 9999; overflow: hidden;
-    }
-
+    /* Animations */
     @keyframes rgb-move { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
     @keyframes jalan-terus { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 </style>
@@ -182,15 +183,23 @@ fitur_html = """
         <div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATI SLOT - SITUS GACOR TERPERCAYA - PROSES DEPO & WD TERCEPAT! 🔥</div>
     </div>
 </div>
-
 <div class="scroll-container">
-    <div class="brand-item"><img src="https://akongads.store/images/menu-icon/slot.webp"><br>SLOT</div>
-    <div class="brand-item"><img src="https://i.ibb.co/S769989/pragmatic.png"><br>CASINO</div>
-    <div class="brand-item"><img src="https://i.ibb.co/0YmYVf8/pgsoft.png"><br>SPORT+</div>
-    <div class="brand-item"><img src="https://i.ibb.co/XW3px3P/habanero.png"><br>TOGEL</div>
-    <div class="brand-item"><img src="https://i.ibb.co/fM8vXz3/joker.png"><br>IKAN</div>
+    <div class="brand-item" onclick="window.parent.location.href='?menu=SLOT'">
+        <img src="https://akongads.store/images/menu-icon/slot.webp"><br>SLOT
+    </div>
+    <div class="brand-item" onclick="window.parent.location.href='?menu=CASINO'">
+        <img src="https://i.ibb.co/S769989/pragmatic.png"><br>CASINO
+    </div>
+    <div class="brand-item" onclick="window.parent.location.href='?menu=SPORT'">
+        <img src="https://i.ibb.co/0YmYVf8/pgsoft.png"><br>SPORT+
+    </div>
+    <div class="brand-item" onclick="window.parent.location.href='?menu=TOGEL'">
+        <img src="https://i.ibb.co/XW3px3P/habanero.png"><br>TOGEL
+    </div>
+    <div class="brand-item" onclick="window.parent.location.href='?menu=IKAN'">
+        <img src="https://i.ibb.co/fM8vXz3/joker.png"><br>IKAN
+    </div>
 </div>
-
 <div class="winner-box">
     <div style="color:#ffd700; font-size:11px; font-weight:bold; border-bottom:1px solid #333; padding-bottom:5px;">🏆 LIVE WINNER REAL-TIME</div>
     <div class="win-content">
@@ -205,22 +214,20 @@ fitur_html = """
     <div class="jp-num">RP <span id="jp-val">8.715.784.119</span></div>
 </div>
 
-<div id="btn-chat-s2" onclick="openS2()">💬</div>
-<div id="overlay-s2" onclick="closeS2()"></div>
-<div id="popup-s2">
-    <div style="background:linear-gradient(90deg,#ffd700,#ff8c00); padding:12px; color:black; font-weight:bold; display:flex; justify-content:space-between;">
-        <span>👤 CUSTOMER SERVICE</span>
-        <span onclick="closeS2()" style="cursor:pointer; font-size:25px;">&times;</span>
-    </div>
-    <img src="https://i.supaimg.com/e2052feb-b9dd-4dac-b762-c0dee9b0bd7b/8501f28f-7c15-46f9-8664-9a86a60e0a30.png" style="width:100%;">
-    <div style="padding:15px; text-align:center;">
-        <a href="https://wa.me/6285724785177" target="_blank" style="display:block; background:#25d366; color:white; padding:10px; margin-bottom:5px; border-radius:5px; text-decoration:none;">WHATSAPP</a>
-        <a href="https://t.me/aldiafnd07" target="_blank" style="display:block; background:#0088cc; color:white; padding:10px; margin-bottom:5px; border-radius:5px; text-decoration:none;">TELEGRAM</a>
-    </div>
-</div>
-
 <script>
-    let sIdx = 0; setInterval(() => { sIdx = (sIdx + 1) % 3; const s = document.getElementById('mainSlider'); if(s) s.scrollTo({left: sIdx * s.clientWidth, behavior: 'smooth'}); }, 3000);
+    // Logic Kirim Menu ka Streamlit
+    function sendMenu(val) {
+        window.parent.postMessage({type: 'set_menu', value: val}, '*');
+    }
+
+    // Slider Otomatis
+    let sIdx = 0; setInterval(() => { 
+        sIdx = (sIdx + 1) % 3; 
+        const s = document.getElementById('mainSlider');
+        if(s) s.scrollTo({left: sIdx * s.clientWidth, behavior: 'smooth'});
+    }, 3000);
+
+    // Winner Box Update
     const us = ["J***p", "R***ky", "S2***ot", "A***ng", "M***ky"];
     const gs = ["Olympus", "Mahjong 2", "Princess"];
     setInterval(() => {
@@ -228,13 +235,86 @@ fitur_html = """
         document.getElementById('g-win').innerText = "[" + gs[Math.floor(Math.random()*gs.length)] + "]";
         document.getElementById('a-win').innerText = "IDR " + (Math.floor(Math.random()*5000)+100) + ".000";
     }, 3000);
-    let jVal = 8715784119; setInterval(() => { jVal += Math.floor(Math.random()*5000); document.getElementById('jp-val').innerText = jVal.toLocaleString('id-ID'); }, 100);
-    function openS2() { document.getElementById('overlay-s2').style.display='block'; document.getElementById('popup-s2').style.display='block'; }
-    function closeS2() { document.getElementById('overlay-s2').style.display='none'; document.getElementById('popup-s2').style.display='none'; }
+
+    // Jackpot Counter
+    let jVal = 8715784119; setInterval(() => { 
+        jVal += Math.floor(Math.random()*5000); 
+        document.getElementById('jp-val').innerText = jVal.toLocaleString('id-ID'); 
+    }, 100);
 </script>
 """
-components.html(fitur_html, height=650)
 
+# Handle Menu ti HTML
+from streamlit_gsheets import GSheetsConnection # Conto bisi peryogi, mun henteu keun wae
+import streamlit.components.v1 as components
+
+# Ieu penting sangkan bisa nangkep klik tina HTML
+st.components.v1.html(fitur_html, height=480)
+
+# KUMPULAN GAME (MANUAL & OTOMATIS SCROLL)
+st.subheader(f"🎮 DAFTAR GAME {st.session_state.menu_aktif}")
+
+def list_game_scroll(daftar):
+    # CSS pikeun game card
+    game_style = """
+    <style>
+        .g-container { display: flex; overflow-x: auto; gap: 12px; padding: 10px 5px; }
+        .g-container::-webkit-scrollbar { display: none; }
+        .g-card { flex: 0 0 auto; width: 110px; background: #1a1d24; border: 1px solid #333; border-radius: 10px; text-align: center; padding: 8px; }
+        .g-card img { width: 100%; border-radius: 8px; margin-bottom: 5px; border: 1px solid #444; }
+        .g-card p { color: #eee; font-size: 10px; margin: 0; font-weight: bold; overflow: hidden; white-space: nowrap; }
+    </style>
+    """
+    items = "".join([f'<div class="g-card"><img src="{i["img"]}"><p>{i["nama"]}</p></div>' for i in daftar])
+    components.html(game_style + f'<div class="g-container">{items}</div>', height=160)
+st.markdown(f"### 🎰 {menu_aktif} GAMES")
+
+# Wadah Scroll Gambar Game
+if menu_aktif == "SLOT":
+    # Ieu daptar brand slot saperti dina video
+    slot_brands = [
+        "https://i.ibb.co/S769989/pragmatic.png",
+        "https://i.ibb.co/0YmYVf8/pgsoft.png",
+        "https://i.ibb.co/XW3px3P/habanero.png",
+        "https://i.ibb.co/fM8vXz3/joker.png",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR_eYp-o6T-0W-KqS-6Q6W_U&s" # CQ9
+    ]
+    
+    # Bikin scroll horizontal manual pake HTML
+    game_list_html = f"""
+    <div style="display: flex; overflow-x: auto; gap: 10px; padding: 10px;">
+        {''.join([f'<img src="{link}" style="width:100px; height:100px; border-radius:10px; border:1px solid #ffd700;">' for link in slot_brands])}
+    </div>
+    """
+    st.components.v1.html(game_list_html, height=130)
+
+elif menu_aktif == "CASINO":
+    st.write("Daptar Live Casino...")
+    # Tambahkeun gambar brand Casino di dieu
+
+elif menu_aktif == "SPORT":
+    st.write("Daptar Sportbook...")
+    # Tambahkeun gambar brand Sport di dieu
+
+# DATA GAME DUMASAR MENU
+if st.session_state.menu_aktif == "SLOT":
+    data = [
+        {"nama": "Pragmatic", "img": "https://i.ibb.co/S769989/pragmatic.png"},
+        {"nama": "PG Soft", "img": "https://i.ibb.co/0YmYVf8/pgsoft.png"},
+        {"nama": "Habanero", "img": "https://i.ibb.co/XW3px3P/habanero.png"},
+        {"nama": "Microgame", "img": "https://i.ibb.co/fM8vXz3/joker.png"},
+        {"nama": "CQ9", "img": "https://akongads.store/images/menu-icon/slot.webp"}
+    ]
+    list_game_scroll(data)
+
+elif st.session_state.menu_aktif == "CASINO":
+    data = [
+        {"nama": "Live Casino", "img": "https://i.ibb.co/S769989/pragmatic.png"},
+        {"nama": "Baccarat", "img": "https://i.ibb.co/0YmYVf8/pgsoft.png"}
+    ]
+    list_game_scroll(data)
+
+# ... tambahkeun menu liana (TOGEL, IKAN, SPORT) di dieu
 
 # --- 7. INPUT LOGIN TENGAH ---
 st.markdown("### 🔑 LOGIN UTAMA")
