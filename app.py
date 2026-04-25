@@ -387,3 +387,39 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# --- 10. FITUR CHATBOT AI SADERHANA ---
+if "pesan_chat" not in st.session_state:
+    st.session_state.pesan_chat = []
+
+def balesan_ai(tanya):
+    tanya = tanya.lower()
+    if "jadwal" in tanya or "gacor" in tanya:
+        return "🔥 Bocoran Gacor dinten ieu: Mahjong Ways 2 (98%) & Gates of Olympus (97%). Gaskeun!"
+    elif "depo" in tanya or "wd" in tanya:
+        return "💰 Proses Depo/WD di S2 SEJATISLOT ngan saukur 1-3 menit, Mang. Amanah pisan!"
+    elif "promo" in tanya or "bonus" in tanya:
+        return "🎁 Aya Bonus New Member 100% sarta Rollingan Mingguan. Cék di menu Promo nya!"
+    else:
+        return "Halo! Abdi AI S2. Aya anu tiasa dibantos? Ketik 'Depo', 'Gacor', atanapi 'Promo'."
+
+# --- 2. TAMPILAN UI CHATBOT ---
+with st.expander("🤖 TANYA AI S2 (CHATBOT)", expanded=False):
+    st.markdown("<small><i>Bot otomatis siap mantuan 24 jam</i></small>", unsafe_allow_html=True)
+    
+    # Wadah obrolan
+    for msg in st.session_state.pesan_chat:
+        with st.chat_message(msg["role"]):
+            st.write(msg["content"])
+
+    # Input pamaké
+    if prompt := st.chat_input("Ketik di dieu..."):
+        st.session_state.pesan_chat.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.write(prompt)
+        
+        # Jawaban AI
+        jawaban = balesan_ai(prompt)
+        st.session_state.pesan_chat.append({"role": "assistant", "content": jawaban})
+        with st.chat_message("assistant"):
+            st.write(jawaban)
+
