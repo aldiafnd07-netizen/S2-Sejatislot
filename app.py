@@ -347,7 +347,7 @@ st.markdown("""
     </div>
     <img src="https://i.supaimg.com/e2052feb-b9dd-4dac-b762-c0dee9b0bd7b/8501f28f-3d3c-4440-8af2-b9a41789e2e6.jpg" style="width: 100%; border-bottom: 2px solid #ffd700;">
     <div class="sosmed-container">
-        <a href="https://wa.me/6285781785177" target="_blank" class="sosmed-item">
+        <a href="https://wa.me/6285724785177" target="_blank" class="sosmed-item">
             <div class="sosmed-left">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="sosmed-icon">
                 <span>WhatsApp</span>
