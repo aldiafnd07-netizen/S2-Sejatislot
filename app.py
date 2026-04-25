@@ -133,12 +133,83 @@ fitur_html = """
     .brand-item { flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px; font-weight: bold; }
     .brand-item img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #222; }
 
-    /* Winner Box & JP */
-    .winner-box { background: rgba(26, 29, 36, 0.95); border-radius: 12px; border: 1px solid #333; padding: 10px; margin-top:10px; }
-    .win-content { display: flex; justify-content: space-between; color: white; font-size: 10px; margin-top: 5px; }
-    .jp-wrapper { margin-top: 10px; background: #000; border: 2px solid #ffd700; border-radius: 10px; padding: 10px; text-align: center; }
-    .jp-num { color: #ff0000; font-size: 24px; font-weight: 900; }
+   <style>
+    /* Kotak Utama */
+    .winner-box { 
+        background: linear-gradient(180deg, #12141a 0%, #000000 100%); 
+        border-radius: 15px; 
+        border: 1px solid #444; 
+        margin-top: 10px; 
+        height: 100px; /* Jangkungna pas keur 2-3 baris */
+        overflow: hidden; 
+        position: relative;
+        box-shadow: inset 0 0 20px rgba(0,0,0,1);
+    }
+    
+    /* Header tetep cicing di luhur */
+    .win-header {
+        background: #1a1d24;
+        color: #ffd700;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        padding: 5px 0;
+        border-bottom: 1px solid #ffd700;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        text-shadow: 0 0 5px #ffd700;
+    }
 
+    /* Animasi Ngalir (Marquee) */
+    .win-list-container {
+        padding: 5px 10px;
+        display: flex;
+        flex-direction: column;
+        animation: scroll-up 12s linear infinite; /* Kecepatan ngalir */
+    }
+
+    .win-item { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        color: #ffffff; 
+        font-size: 11px; 
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        /* Efek Bayangan & Motion Blur */
+        text-shadow: 0px 0px 3px rgba(255,255,255,0.5);
+        filter: blur(0.2px); 
+    }
+
+    /* Animasi Jalanna */
+    @keyframes scroll-up {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); } /* Ngalir nepi ka satengahna tuluy malik deui */
+    }
+
+    .win-item span:nth-child(3) {
+        color: #00ff00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #00ff00;
+    }
+</style>
+
+<div class="winner-box">
+    <div class="win-header">🏆 LIVE WINNER REAL-TIME</div>
+    <div class="win-list-container">
+        <div class="win-item"><span>A***g88</span><span style="color:#ffd700;">[Olympus]</span><span>IDR 1.250.000</span></div>
+        <div class="win-item"><span>M***x91</span><span style="color:#ffd700;">[Mahjong 2]</span><span>IDR 5.800.000</span></div>
+        <div class="win-item"><span>S2***SLOT</span><span style="color:#ffd700;">[Princess]</span><span>IDR 950.000</span></div>
+        <div class="win-item"><span>R***ky_A</span><span style="color:#ffd700;">[Sweet Bonanza]</span><span>IDR 2.100.000</span></div>
+        <div class="win-item"><span>W***ner1</span><span style="color:#ffd700;">[Wild West]</span><span>IDR 3.450.000</span></div>
+        <div class="win-item"><span>A***g88</span><span style="color:#ffd700;">[Olympus]</span><span>IDR 1.250.000</span></div>
+        <div class="win-item"><span>M***x91</span><span style="color:#ffd700;">[Mahjong 2]</span><span>IDR 5.800.000</span></div>
+        <div class="win-item"><span>S2***SLOT</span><span style="color:#ffd700;">[Princess]</span><span>IDR 950.000</span></div>
+        <div class="win-item"><span>R***ky_A</span><span style="color:#ffd700;">[Sweet Bonanza]</span><span>IDR 2.100.000</span></div>
+        <div class="win-item"><span>W***ner1</span><span style="color:#ffd700;">[Wild West]</span><span>IDR 3.450.000</span></div>
+    </div>
+</div>
     /* LIVE CHAT POPUP */
     #btn-chat-s2 {
         position: fixed; bottom: 110px; right: 20px; width: 65px; height: 65px;
@@ -280,3 +351,4 @@ st.markdown("""
     <div class="nav-link">💬<br>CHAT</div>
 </div>
 """, unsafe_allow_html=True)
+
