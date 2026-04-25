@@ -156,55 +156,63 @@ else:
         if st.button("DAFTAR", use_container_width=True): register_dialog()
 
     m_aktif = st.query_params.get("m", "SLOT")
+# --- 6. FITUR VISUAL (VIDEO BANNER & MARQUEE) ---
+fitur_html = f"""
+<style>
+    .main-container {{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Ngatengahkeun sadayana */
+    }}
+    
+    .video-container {{
+        width: 100%;
+        max-width: 500px; /* Supados teu ageung teuing di HP */
+        overflow: hidden;
+        border-radius: 15px;
+        border: 2px solid #ffd700;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }}
 
-    # Fitur Visual
-    fitur_html = f"""
-    <style>
-        .slider-container {{ width: 100%; overflow: hidden; border-radius: 15px; margin-bottom:10px; }}
-        .slider {{ display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }}
-        .slider::-webkit-scrollbar {{ display: none; }}
-        .slider img {{ width: 100%; flex-shrink: 0; scroll-snap-align: start; }}
-        .rgb-border {{ margin-top: 10px; padding: 3px; border-radius: 10px; background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000); background-size: 400% 400%; animation: rgb-move 5s linear infinite; }}
-        .inner-marquee {{ background: #1a1d24; border-radius: 8px; padding: 10px; overflow: hidden; }}
-        .scrolling-text {{ display: inline-block; white-space: nowrap; color: #ffd700; font-weight: bold; animation: jalan-terus 15s linear infinite; }}
-        .scroll-container {{ display: flex; overflow-x: auto; white-space: nowrap; gap: 15px; padding: 15px 5px; background: rgba(0,0,0,0.5); border-radius: 10px; margin-top:10px; }}
-        .brand-item {{ flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px; font-weight: bold; cursor: pointer; }}
-        .brand-item img {{ width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #000; }}
-        .active img {{ border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }}
-        .winner-box {{ background: rgba(0, 0, 0, 0.85); border-radius: 12px; border: 1px solid #ffd700; margin-top: 15px; height: 110px; overflow: hidden; position: relative; }}
-        .win-header {{ background: #1a1d24; color: #ffd700; font-size: 11px; font-weight: bold; text-align: center; padding: 6px 0; border-bottom: 1px solid #ffd700; position: sticky; top: 0; z-index: 10; }}
-        .win-list-container {{ padding: 0 10px; animation: scroll-up 12s linear infinite; }}
-        .win-item {{ display: flex; justify-content: space-between; padding: 8px 0; color: #fff; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.1); }}
-        .jp-wrapper {{ margin-top: 10px; background: #000; border: 2px solid #ffd700; border-radius: 10px; padding: 10px; text-align: center; }}
-        .jp-num {{ color: #ff0000; font-size: 24px; font-weight: 900; text-shadow: 0 0 10px #ff0000; }}
-        @keyframes scroll-up {{ 0% {{ transform: translateY(0); }} 100% {{ transform: translateY(-50%); }} }}
-        @keyframes rgb-move {{ 0%{{background-position:0% 50%}} 100%{{background-position:100% 50%}} }}
-        @keyframes jalan-terus {{ from {{ transform: translateX(100%); }} to {{ transform: translateX(-100%); }} }}
-    </style>
-    <div class="slider-container"><div class="slider" id="mainSlider"><img src="https://i.imgur.com/IA1m2GF.png"><img src="https://i.imgur.com/vUeCcl3.png"></div></div>
-    <div class="rgb-border"><div class="inner-marquee"><div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATISLOT - SITUS GACOR TERPERCAYA 🔥</div></div></div>
-    <div class="scroll-container">
-        <div class="brand-item {'active' if m_aktif == 'SLOT' else ''}"><img src="https://akongads.store/images/menu-icon/slot.webp"><br>SLOT</div>
-        <div class="brand-item"><img src="https://i.ibb.co/S769989/pragmatic.png"><br>CASINO</div>
+    video {{
+        width: 100%;
+        display: block;
+    }}
+
+    .rgb-border {{
+        width: 100%;
+        margin-top: 10px; padding: 3px; border-radius: 10px;
+        background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+        background-size: 400% 400%; animation: rgb-move 5s linear infinite;
+    }}
+    .inner-marquee {{ background: #1a1d24; border-radius: 8px; padding: 10px; overflow: hidden; }}
+    .scrolling-text {{ 
+        display: inline-block; white-space: nowrap; color: #ffd700; 
+        font-weight: bold; animation: jalan-terus 15s linear infinite; 
+    }}
+
+    @keyframes rgb-move {{ 0%{{background-position:0% 50%}} 100%{{background-position:100% 50%}} }}
+    @keyframes jalan-terus {{ from {{ transform: translateX(100%); }} to {{ transform: translateX(-100%); }} }}
+</style>
+
+<div class="main-container">
+    <div class="video-container">
+        <video autoplay muted loop playsinline>
+            <source src="https://files.catbox.moe/6v0m9i.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-    <div class="winner-box">
-        <div class="win-header">🏆 LIVE WINNER</div>
-        <div class="win-list-container">
-            <div class="win-item"><span>User***Jp</span><span style="color:#00ff00;">IDR 2.500.000</span></div>
-            <div class="win-item"><span>S2***Slot</span><span style="color:#00ff00;">IDR 5.750.000</span></div>
-            <div class="win-item"><span>User***Jp</span><span style="color:#00ff00;">IDR 2.500.000</span></div>
+
+    <div class="rgb-border">
+        <div class="inner-marquee">
+            <div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATI SLOT SITUS GACOR AMAN TERPERCAYA - PROSES DEPO & WD PASTI DIBAYAR TERCEPAT SE-INDONESIA - SALAM JP BOSS🔥</div>
         </div>
     </div>
-    <div class="jp-wrapper"><div class="jp-num">RP <span id="jp-val">8.715.784.119</span></div></div>
-    <script>
-        let jVal = 8715784119; setInterval(() => {{
-            jVal += Math.floor(Math.random()*5000);
-            let jv = document.getElementById('jp-val');
-            if(jv) jv.innerText = jVal.toLocaleString('id-ID');
-        }}, 100);
-    </script>
-    """
-    components.html(fitur_html, height=520)
+</div>
+"""
+components.html(fitur_html, height=350)
+
 
     # Game Scroll Section
     st.markdown(f"#### 🎮 GAME TERPOPULER: {m_aktif}")
@@ -229,37 +237,118 @@ else:
     if st.button("🤖 CHAT SUPPORT AI"):
         pindah_halaman("chat_ai")
 
-# --- 5. NAVIGASI BAWAH & POPUP SOSMED (GLOBAL) ---
-footer_html = f"""
+# --- 9. NAVIGASI BAWAH + POPUP LIVE CHAT (VERSI FIX ANTI-ERROR) ---
+footer_pro = f"""
 <style>
+    /* Sembunyikan Checkbox Logika */
     #toggle-chat {{ display: none; }}
+
+    /* Tombol Chat Melayang */
     .btn-chat-float {{
-        position: fixed; bottom: 95px; right: 20px;
-        width: 65px; height: 65px;
+        position: fixed; bottom: 90px; right: 20px;
+        width: 60px; height: 60px;
         background: linear-gradient(180deg, #ffd700, #ff8c00);
         border-radius: 50%; display: flex; justify-content: center; align-items: center;
         box-shadow: 0 4px 15px rgba(0,0,0,0.6); cursor: pointer; z-index: 100000;
-        animation: pulse 2s infinite; border: 2px solid #fff;
+        animation: pulse-gold 2s infinite; border: 2px solid #fff;
     }}
+    .btn-chat-float img {{ width: 30px; }}
+
+    @keyframes pulse-gold {{
+        0% {{ box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }}
+        70% {{ box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }}
+        100% {{ box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }}
+    }}
+
+    /* Overlay Layar Gelap */
+    .chat-overlay {{
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 100001;
+        opacity: 0; visibility: hidden; transition: 0.3s;
+    }}
+
+    /* Kotak Popup Menu */
     .chat-box {{
-        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 300px; background: #111; border: 2px solid #ffd700; border-radius: 15px;
-        z-index: 100002; display: none; overflow: hidden;
+        position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        width: 300px; background: #111;
+        border: 2px solid #ffd700; border-radius: 15px; z-index: 100002;
+        opacity: 0; visibility: hidden; transition: 0.3s;
+        overflow: hidden;
     }}
-    #toggle-chat:checked ~ .chat-box {{ display: block; }}
-    @keyframes pulse {{ 0% {{ box-shadow: 0 0 0 0 rgba(255,215,0,0.7); }} 70% {{ box-shadow: 0 0 0 15px rgba(255,215,0,0); }} }}
+
+    /* Logika Buka Tutup */
+    #toggle-chat:checked ~ .chat-overlay {{ opacity: 1; visibility: visible; }}
+    #toggle-chat:checked ~ .chat-box {{ opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }}
+
+    .chat-header {{
+        background: linear-gradient(90deg, #ffd700, #b8860b);
+        color: #000; padding: 12px; font-weight: bold;
+        display: flex; justify-content: space-between; align-items: center;
+    }}
+
+    .sosmed-container {{ padding: 15px; background: #1a1a1a; }}
+    .sosmed-item {{
+        display: flex; justify-content: space-between; align-items: center;
+        background: #222; margin-bottom: 10px; padding: 12px;
+        border-radius: 8px; text-decoration: none; border: 1px solid #333;
+    }}
+    .sosmed-left {{ display: flex; align-items: center; gap: 10px; color: #fff; font-size: 14px; font-weight: bold; }}
+
+    /* Navigasi Bar Bawah */
+    .nav-container {{
+        position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+        background: #111; display: flex; justify-content: space-around;
+        align-items: center; border-top: 2px solid #ffd700; z-index: 99999;
+    }}
+    .nav-item {{ text-align: center; color: #fff; font-size: 10px; text-decoration: none; cursor: pointer; }}
 </style>
+
 <input type="checkbox" id="toggle-chat">
-<label for="toggle-chat" class="btn-chat-float"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968771.png" width="35"></label>
+
+<label for="toggle-chat" class="btn-chat-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968771.png">
+</label>
+
+<label for="toggle-chat" class="chat-overlay"></label>
+
 <div class="chat-box">
-    <div style="background:#ffd700; color:black; padding:10px; font-weight:bold; display:flex; justify-content:space-between;">
-        <span>HUBUNGI CS</span><label for="toggle-chat" style="cursor:pointer;">✖</label>
+    <div class="chat-header">
+        <span>🎧 CS S2 SEJATISLOT</span>
+        <label for="toggle-chat" style="cursor:pointer;">✕</label>
     </div>
-    <div style="padding:15px; text-align:center;">
-        <a href="https://wa.me/6285724785177" style="display:block; background:#25d366; color:white; padding:10px; margin-bottom:10px; text-decoration:none; border-radius:5px;">WHATSAPP</a>
-        <a href="https://t.me/aldiafnd07" style="display:block; background:#0088cc; color:white; padding:10px; text-decoration:none; border-radius:5px;">TELEGRAM</a>
+    <div class="sosmed-container">
+        <a href="https://wa.me/6285724785177" target="_blank" class="sosmed-item">
+            <div class="sosmed-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20">
+                <span>WhatsApp</span>
+            </div>
+            <div style="color:#ffd700; font-size:10px;">HUBUNGI</div>
+        </a>
+        <a href="https://t.me/aldiafnd07" target="_blank" class="sosmed-item">
+            <div class="sosmed-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="20">
+                <span>Telegram</span>
+            </div>
+            <div style="color:#ffd700; font-size:10px;">HUBUNGI</div>
+        </a>
+        <a href="https://facebook.com/aldi.pehul.12" target="_blank" class="sosmed-item">
+            <div class="sosmed-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" width="20">
+                <span>Facebook</span>
+            </div>
+            <div style="color:#ffd700; font-size:10px;">HUBUNGI</div>
+        </a>
     </div>
 </div>
+
+<div class="nav-container">
+    <div class="nav-item" onclick="window.parent.location.reload()">🏠<br>HOME</div>
+    <div class="nav-item">🎁<br>PROMO</div>
+    <div style="background:#ffd700; width:60px; height:60px; border-radius:50%; border:4px solid #111; margin-top:-30px; display:flex; justify-content:center; align-items:center; color:#000; font-weight:bold; cursor:pointer;" onclick="window.parent.location.reload()">MASUK</div>
+    <div class="nav-item">💰<br>DEPO</div>
+    <label for="toggle-chat" class="nav-item">🎧<br>CHAT</label>
+</div>
 """
-components.html(footer_html, height=100)
+components.html(footer_pro, height=100)
 
