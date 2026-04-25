@@ -205,99 +205,14 @@ fitur_html = f"""
         background-size: 400% 400%; animation: rgb-move 5s linear infinite;
     }}
     .inner-marquee {{ background: #1a1d24; border-radius: 8px; padding: 10px; overflow: hidden; }}
-    .scrolling-text {{ display: inline-block; white-space: nowrap; color: #ffd700; font-weight: bold; anima>
+    .scrolling-text {{ display: inline-block; white-space: nowrap; color: #ffd700; font-weight: bold; animation: jalan-terus 15s linear infinite; }}
 
     .scroll-container {{
         display: flex; overflow-x: auto; white-space: nowrap; gap: 15px; padding: 15px 5px;
         background: rgba(0,0,0,0.5); border-radius: 10px; margin-top:10px;
     }}
     .scroll-container::-webkit-scrollbar {{ display: none; }}
-    .brand-item {{ flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px; font-w>
-    .brand-item img {{ width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background>
-    .active img {{ border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }}
- .winner-box {{
-        background: rgba(0, 0, 0, 0.85); border-radius: 12px; border: 1px solid #ffd700;
-        margin-top: 15px; height: 110px; overflow: hidden; position: relative;
-    }}
-    .win-header {{
-        background: #1a1d24; color: #ffd700; font-size: 11px; font-weight: bold;
-        text-align: center; padding: 6px 0; border-bottom: 1px solid #ffd700;
-        position: sticky; top: 0; z-index: 10;
-    }}
-    .win-list-container {{ padding: 0 10px; animation: scroll-up 12s linear infinite; }}
-    .win-item {{
-        display: flex; justify-content: space-between; padding: 8px 0;
-        color: #fff; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.1);
-    }}
-
-    .jp-wrapper {{ margin-top: 10px; background: #000; border: 2px solid #ffd700; border-radius: 10px; padd>
-    .jp-num {{ color: #ff0000; font-size: 24px; font-weight: 900; text-shadow: 0 0 10px #ff0000; }}
-
-    @keyframes scroll-up {{ 0% {{ transform: translateY(0); }} 100% {{ transform: translateY(-50%); }} }}
-    @keyframes rgb-move {{ 0%{{background-position:0% 50%}} 100%{{background-position:100% 50%}} }}
-    @keyframes jalan-terus {{ from {{ transform: translateX(100%); }} to {{ transform: translateX(-100%); }>
-</style>
-
-<div class="slider-container">
-    <div class="slider" id="mainSlider">
-        <img src="https://i.imgur.com/IA1m2GF.png">
-        <img src="https://i.imgur.com/vUeCcl3.png">
-        <img src="https://i.imgur.com/kek6NF4.png">
-    </div>
-</div>
-
-<div class="rgb-border">
-    <div class="inner-marquee"><div class="scrolling-text">🔥 SELAMAT DATANG DI S2 SEJATI SLOT - PROSES DEP>
-</div>
-
-<div class="scroll-container">
-    <div class="brand-item {'active' if m_aktif == 'SLOT' else ''}" onclick="window.parent.location.href='?>
-        <img src="https://akongads.store/images/menu-icon/slot.webp"><br>SLOT
-    </div>
-    <div class="brand-item {'active' if m_aktif == 'CASINO' else ''}" onclick="window.parent.location.href=>
-        <img src="https://i.ibb.co/S769989/pragmatic.png"><br>CASINO
-    </div>
-    <div class="brand-item {'active' if m_aktif == 'SPORT' else ''}" onclick="window.parent.location.href='>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x_q8hZ68o2fIuN7VlZ1t2H6Y-f5K6-r-w>
-    </div>
-    <div class="brand-item {'active' if m_aktif == 'TOGEL' else ''}" onclick="window.parent.location.href='>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0R_B8n1lG4_u7yS6Wv3U4J_Y_6rB8v8_oO>
-    </div>
-</div>
-
-<div class="winner-box">
-    <div class="win-header">🏆 LIVE WINNER REAL-TIME</div>
-    <div class="win-list-container">
-        <div class="win-item"><span>User***Jp</span><span style="color:#ffd700;">[Olympus]</span><span styl>
-        <div class="win-item"><span>M***x91</span><span style="color:#ffd700;">[Mahjong]</span><span style=>
-        <div class="win-item"><span>R***ky_A</span><span style="color:#ffd700;">[Princess]</span><span styl>
-        <div class="win-item"><span>S2***Slot</span><span style="color:#ffd700;">[Bonanza]</span><span styl>
-        <div class="win-item"><span>User***Jp</span><span style="color:#ffd700;">[Olympus]</span><span styl>
-        <div class="win-item"><span>M***x91</span><span style="color:#ffd700;">[Mahjong]</span><span style=>
-        <div class="win-item"><span>R***ky_A</span><span style="color:#ffd700;">[Princess]</span><span styl>
-        <div class="win-item"><span>S2***Slot</span><span style="color:#ffd700;">[Bonanza]</span><span styl>
-    </div>
-</div>
-
-<div class="jp-wrapper">
-    <div style="color:#ffd700; font-size:10px; font-weight:bold;">✨ PROGRESSIVE JACKPOT ✨</div>
-    <div class="jp-num">RP <span id="jp-val">8.715.784.119</span></div>
-</div>
-
-<script>
-    let sIdx = 0; setInterval(() => {{
-        sIdx = (sIdx + 1) % 3;
-        let s = document.getElementById('mainSlider');
-        if(s) s.scrollTo({{left: sIdx * s.clientWidth, behavior: 'smooth'}});
-    }}, 3000);
-    let jVal = 8715784119; setInterval(() => {{
-        jVal += Math.floor(Math.random()*5000);
-        let jv = document.getElementById('jp-val');
-        if(jv) jv.innerText = jVal.toLocaleString('id-ID');
-    }}, 100);
-</script>
-"""
-components.html(fitur_html, height=520)
+    .brand-item {{ flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size
 
 # --- 7. TAMPILAN GAME SCROLL ---
 st.markdown(f"#### 🎮 KUMPULAN GAME: {m_aktif}")
