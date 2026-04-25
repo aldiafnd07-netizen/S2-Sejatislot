@@ -226,14 +226,52 @@ st.text_input("Username", key="main_u")
 st.text_input("Password", type="password", key="main_p")
 st.button("MASUK SEKARANG", type="primary", use_container_width=True)
 
-# --- 9. NAVIGASI BAWAH ---
+# --- 9. NAVIGASI BAWAH + LIVE CHAT ---
 st.markdown("""
 <style>
-    .nav-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: #111; display: flex; justify-content: space-around; align-items: center; border-top: 2px solid #ffd700; z-index: 9999; }
-    .floating-center { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 75px; height: 75px; background: linear-gradient(180deg, #ffd700, #b8860b); border-radius: 50%; border: 4px solid #111; display: flex; justify-content: center; align-items: center; z-index: 10000; box-shadow: 0 0 15px #ffd700; cursor: pointer; }
+    /* Tombol Live Chat Melayang */
+    .chat-float {
+        position: fixed;
+        bottom: 90px; /* Di luhureun navigasi */
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #007bff; /* Warna Biru Chat */
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        z-index: 10001;
+        cursor: pointer;
+        border: 2px solid white;
+    }
+    .chat-float img { width: 35px; }
+
+    /* Navigasi Utama */
+    .nav-container { 
+        position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; 
+        background: #111; display: flex; justify-content: space-around; 
+        align-items: center; border-top: 2px solid #ffd700; z-index: 9999; 
+    }
+    .floating-center { 
+        position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+        width: 75px; height: 75px; background: linear-gradient(180deg, #ffd700, #b8860b); 
+        border-radius: 50%; border: 4px solid #111; display: flex; 
+        justify-content: center; align-items: center; z-index: 10000; 
+        box-shadow: 0 0 15px #ffd700; cursor: pointer; 
+    }
     .nav-link { text-align: center; color: white; text-decoration: none; width: 20%; font-size: 10px; }
 </style>
-<div class="floating-center" onclick="window.parent.location.reload();"><b style="color:black; font-size:11px;">MASUK</b></div>
+
+<a href="https://direct.lc.chat/MANG_GANTI_DI_DIEU" target="_blank" class="chat-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968771.png" alt="Chat">
+</a>
+
+<div class="floating-center" onclick="window.parent.location.reload();">
+    <b style="color:black; font-size:11px;">MASUK</b>
+</div>
+
 <div class="nav-container">
     <div class="nav-link">🏠<br>HOME</div>
     <div class="nav-link">🎁<br>PROMO</div>
