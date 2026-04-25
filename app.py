@@ -107,12 +107,14 @@ def simpan_pendaftar(u, p, e, t, b, nr, na, ref):
     try:
         conn = sqlite3.connect('database_s2.db')
         c = conn.cursor()
-       c.execute("INSERT INTO users VALUES (?,?,?,?,?,?,?,?)", (u, p, e, t, b, nr, na, ref))
+        # Baris di handap ieu kedah sajajar leres (4 spasi/1 tab)
+        c.execute("INSERT INTO users VALUES (?,?,?,?,?,?,?,?)", (u, p, e, t, b, nr, na, ref))
         conn.commit()
         conn.close()
         return True
     except sqlite3.IntegrityError:
         return False
+	
 
 init_db()
 
