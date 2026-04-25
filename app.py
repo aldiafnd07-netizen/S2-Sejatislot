@@ -212,19 +212,17 @@ fitur_html = f"""
 </div>
 """
 components.html(fitur_html, height=350)
-
-
-    # Game Scroll Section
+       # Game Scroll Section
     st.markdown(f"#### 🎮 GAME TERPOPULER: {m_aktif}")
     game_list = [
         {"n": "Pragmatic", "i": "https://i.ibb.co/S769989/pragmatic.png"},
         {"n": "PG Soft", "i": "https://akongads.store/images/menu-icon/slot.webp"}
     ]
     game_scroll = f"""
-    <div style="display: flex; overflow-x: auto; gap: 12px; padding: 10px;">
-        {''.join([f'<div style="flex:0 0 auto; width:100px; text-align:center;"><img src="{g["i"]}" style="width:80px; border-radius:10px; border:1px solid #ffd700;"><br><span style="color:white; font-size:10px;">{g["n"]}</span></div>' for g in game_list])}
-    </div>
-    """
+<div style="display: flex; overflow-x: auto; gap: 12px; padding: 10px;">
+    {''.join([f'<div style="flex:0 0 auto; width:100px; text-align:center;"><img src="{g["i"]}" style="width:80px; border-radius:10px; border:1px solid #ffd700;"><br><span style="color:white; font-size:10px;">{g["n"]}</span></div>' for g in game_list])}
+</div>
+"""
     components.html(game_scroll, height=150)
 
     # Main Login Form
