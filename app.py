@@ -226,128 +226,102 @@ st.text_input("Username", key="main_u")
 st.text_input("Password", type="password", key="main_p")
 st.button("MASUK SEKARANG", type="primary", use_container_width=True)
 
-# --- 9. FINAL FIX: LIVE CHAT ANTI-BLOCK & ANTI-TETUTUP ---
+# --- 9. NAVIGASI BAWAH + POPUP LIVE CHAT ---
 st.markdown("""
-<div id="wrapper-chat-s2">
-    <div id="pemicu-chat" onclick="openChatS2()">💬</div>
-
-    <div id="layar-hitam" onclick="closeChatS2()"></div>
-
-    <div id="kotak-popup-s2">
-        <div style="background: linear-gradient(90deg, #ffd700, #ff8c00); padding: 12px; color: #000; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>👤 CUSTOMER SERVICE</span>
-            <span onclick="closeChatS2()" style="cursor:pointer; font-size: 28px; line-height: 20px;">&times;</span>
-        </div>
-        
-        <img src="https://i.supaimg.com/e2052feb-b9dd-4dac-b762-c0dee9b0bd7b/8501f28f-3d3c-4440-8af2-b9a41789e2e6.jpg" style="width: 100%; display: block; border-bottom: 2px solid #ffd700;">
-        
-        <div style="background: #1a1a1a;">
-            <a href="https://wa.me/6285781785177" target="_blank" class="link-sosmed">
-                <span>🟢 WhatsApp</span>
-                <span class="tombol-klik">Klik Disini</span>
-            </a>
-            <a href="https://t.me/aldiafnd07" target="_blank" class="link-sosmed">
-                <span>🔵 Telegram</span>
-                <span class="tombol-klik">Klik Disini</span>
-            </a>
-            <a href="https://www.facebook.com/aldi.pehul.12" target="_blank" class="link-sosmed">
-                <span>🔵 Facebook</span>
-                <span class="tombol-klik">Klik Disini</span>
-            </a>
-        </div>
-        
-        <div style="padding: 15px; font-size: 11px; color: #ccc; text-align: center; background: #1a1a1a; line-height: 1.4;">
-            Halo! Hubungi CS **S2 SEJATI** melalui sosmed di atas. Kami siap melayani 24 jam non-stop!
-        </div>
-    </div>
-</div>
-
 <style>
-    /* Paksa Tombol Berada di Paling Depan */
-    #pemicu-chat {
-        position: fixed !important;
-        bottom: 115px !important;
-        right: 20px !important;
-        width: 70px !important;
-        height: 70px !important;
-        background: radial-gradient(circle, #00fbff, #0072ff) !important;
-        color: white !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        font-size: 38px !important;
-        z-index: 999999999 !important;
-        cursor: pointer !important;
-        box-shadow: 0 0 25px #00fbff !important;
-        border: 3px solid white !important;
-        -webkit-tap-highlight-color: transparent;
+    /* 1. Tombol Chat Melayang (Biru) */
+    #btn-chat-s2 {
+        position: fixed; bottom: 90px; right: 20px;
+        width: 60px; height: 60px; background: #007bff;
+        border-radius: 50%; display: flex; justify-content: center;
+        align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        z-index: 10001; cursor: pointer; border: 2px solid white;
     }
 
+    /* 2. Layar Hideung (Overlay) */
     #layar-hitam {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.9);
-        z-index: 9999999998;
+        display: none; position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+        z-index: 10002;
     }
 
+    /* 3. Kotak Popup */
     #kotak-popup-s2 {
-        display: none;
-        position: fixed;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        width: 85%;
-        max-width: 380px;
-        border: 2px solid #ffd700;
-        border-radius: 20px;
-        z-index: 9999999999;
-        overflow: hidden;
-        box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+        display: none; position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -50%); width: 320px;
+        background: #1a1a1a; border-radius: 15px;
+        overflow: hidden; z-index: 10003; border: 1px solid #ffd700;
     }
 
     .link-sosmed {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px;
-        border-bottom: 1px solid #333;
-        color: white !important;
-        text-decoration: none !important;
-        font-family: sans-serif;
-        font-weight: bold;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 15px; color: white; text-decoration: none;
+        border-bottom: 1px solid #333; transition: 0.3s;
     }
-
+    .link-sosmed:hover { background: #333; }
     .tombol-klik {
-        background: #ffd700;
-        color: #000 !important;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 12px;
+        background: #ffd700; color: #000; padding: 4px 10px;
+        border-radius: 5px; font-size: 10px; font-weight: bold;
     }
 
-    /* Navigasi Bawah */
-    .nav-container { z-index: 999999 !important; }
+    /* 4. Navigasi Bawah */
+    .nav-container { 
+        position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; 
+        background: #111; display: flex; justify-content: space-around; 
+        align-items: center; border-top: 2px solid #ffd700; z-index: 9999; 
+    }
+    .floating-center { 
+        position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+        width: 75px; height: 75px; background: linear-gradient(180deg, #ffd700, #b8860b); 
+        border-radius: 50%; border: 4px solid #111; display: flex; 
+        justify-content: center; align-items: center; z-index: 10000; 
+        box-shadow: 0 0 15px #ffd700; cursor: pointer; 
+    }
+    .nav-link { text-align: center; color: white; text-decoration: none; width: 20%; font-size: 10px; }
 </style>
+
+<div id="btn-chat-s2" onclick="openChatS2()">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968771.png" width="35">
+</div>
+
+<div id="layar-hitam" onclick="closeChatS2()"></div>
+
+<div id="kotak-popup-s2">
+    <div style="background: linear-gradient(90deg, #ffd700, #ff8c00); padding: 12px; color: #000; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+        <span>👤 CUSTOMER SERVICE</span>
+        <span onclick="closeChatS2()" style="cursor:pointer; font-size: 28px; line-height: 20px;">&times;</span>
+    </div>
+    <img src="https://i.imgur.com/hubungi-kami.jpeg" style="width: 100%; display: block; border-bottom: 2px solid #ffd700;">
+    <div style="background: #1a1a1a;">
+        <a href="https://wa.me/6285781785177" target="_blank" class="link-sosmed">
+            <span>🟢 WhatsApp</span><span class="tombol-klik">Klik Disini</span>
+        </a>
+        <a href="https://t.me/aldiafnd07" target="_blank" class="link-sosmed">
+            <span>🔵 Telegram</span><span class="tombol-klik">Klik Disini</span>
+        </a>
+        <a href="https://www.facebook.com/aldi.pehul.12" target="_blank" class="link-sosmed">
+            <span>🔵 Facebook</span><span class="tombol-klik">Klik Disini</span>
+        </a>
+    </div>
+</div>
+
+<div class="floating-center" onclick="window.parent.location.reload();"><b style="color:black; font-size:11px;">MASUK</b></div>
+<div class="nav-container">
+    <div class="nav-link" onclick="window.parent.location.reload();">🏠<br>HOME</div>
+    <div class="nav-link">🎁<br>PROMO</div>
+    <div style="width: 20%;"></div>
+    <div class="nav-link">📲<br>APK</div>
+    <div class="nav-link" onclick="openChatS2()">💬<br>CHAT</div>
+</div>
 
 <script>
     function openChatS2() {
-        document.getElementById("layar-hitam").style.display = "block";
-        document.getElementById("kotak-popup-s2").style.display = "block";
+        document.getElementById('layar-hitam').style.display = 'block';
+        document.getElementById('kotak-popup-s2').style.display = 'block';
     }
-
     function closeChatS2() {
-        document.getElementById("layar-hitam").style.display = "none";
-        document.getElementById("kotak-popup-s2").style.display = "none";
+        document.getElementById('layar-hitam').style.display = 'none';
+        document.getElementById('kotak-popup-s2').style.display = 'none';
     }
-    
-    // Pastikan tombol di navigasi bawah juga bisa buka chat
-    document.addEventListener('click', function(e) {
-        if(e.target && e.target.innerText && e.target.innerText.includes('CHAT')) {
-            openChatS2();
-        }
-    });
 </script>
 """, unsafe_allow_html=True)
-
