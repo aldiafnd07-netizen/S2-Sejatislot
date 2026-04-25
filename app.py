@@ -132,8 +132,7 @@ fitur_html = """
     .scroll-container::-webkit-scrollbar { display: none; }
     .brand-item { flex: 0 0 auto; width: 70px; text-align: center; color: #ffd700; font-size: 10px; font-weight: bold; }
     .brand-item img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #ffd700; background: #222; }
-
-   <style>
+    <style>
     /* Kotak Utama */
     .winner-box { 
         background: linear-gradient(180deg, #12141a 0%, #000000 100%); 
