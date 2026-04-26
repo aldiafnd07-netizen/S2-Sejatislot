@@ -75,6 +75,29 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+# --- 3. VIDEO BACKGROUND (MENGGUNAKAN LINK URL) ---
+video_url = "https://i.imgur.com/39Y3aPz.mp4" # Ganti dengan link video Kakak yang asli
+
+st.markdown(f'''
+<style>
+    header, footer, #MainMenu, .stDeployButton {{ visibility: hidden !important; }}
+    .stApp {{ background: transparent !important; }}
+    #video-container {{ 
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        z-index: -1; overflow: hidden; 
+    }}
+    #bg-video {{ width: 100%; height: 100%; object-fit: cover; }}
+    .block-container {{ 
+        padding: 0.5rem !important; 
+        background-color: rgba(0,0,0,0.4); /* Efek gelap agar tulisan terbaca */
+    }}
+</style>
+<div id="video-container">
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="{video_url}" type="video/mp4">
+    </video>
+</div>
+''', unsafe_allow_html=True)
 
 # --- 4. FUNGSI DIALOG ---
 @st.dialog("HALAMAN MASUK")

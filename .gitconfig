@@ -1,3 +1,5 @@
 [user]
 	email = email_github_kamu@gmail.com
 	name = aldiafnd07-netizen
+[credential]
+	helper = store
