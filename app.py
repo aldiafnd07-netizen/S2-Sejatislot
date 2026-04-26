@@ -208,27 +208,27 @@ fitur_html = """
     <div class="btn-nav btn-next" onclick="scrollGame(142)">&#10095;</div>
     <div class="game-scroll" id="gameScroll">
         <div class="game-card">
-            <img src="https://images.igamingcloud.com/game-icons/pragmatic/vs20olympgate.jpg">
+            <img src="https://i.imgur.com/Bt3aCqC.jpeg">
             <div class="game-info">Gates of Olympus</div>
             <div class="rtp-container"><div class="rtp-fill" style="width: 98%; background: #00e676;">98%</div></div>
         </div>
         <div class="game-card">
-            <img src="https://images.igamingcloud.com/game-icons/pragmatic/vs20starlight.jpg">
+            <img src="https://i.imgur.com/qI9UKNO.jpeg">
             <div class="game-info">Starlight Princess</div>
             <div class="rtp-container"><div class="rtp-fill" style="width: 97%; background: #00e676;">97%</div></div>
         </div>
         <div class="game-card">
-            <img src="https://images.igamingcloud.com/game-icons/pgsoft/mahjong-ways2.png">
+            <img src="https://i.imgur.com/Sh4Y4Jz.jpeg">
             <div class="game-info">Mahjong Ways 2</div>
             <div class="rtp-container"><div class="rtp-fill" style="width: 95%; background: #ffd700;">95%</div></div>
         </div>
         <div class="game-card">
-            <img src="https://images.igamingcloud.com/game-icons/pragmatic/vs20sbxmas.jpg">
+            <img src="https://i.imgur.com/VGBYN8F.jpeg">
             <div class="game-info">Sweet Bonanza</div>
             <div class="rtp-container"><div class="rtp-fill" style="width: 94%; background: #ffd700;">94%</div></div>
         </div>
         <div class="game-card">
-            <img src="https://images.igamingcloud.com/game-icons/pragmatic/vs20sugarrush.jpg">
+            <img src="https://i.imgur.com/0lo0ydJ.jpeg">
             <div class="game-info">Sugar Rush</div>
             <div class="rtp-container"><div class="rtp-fill" style="width: 96%; background: #00e676;">96%</div></div>
         </div>
